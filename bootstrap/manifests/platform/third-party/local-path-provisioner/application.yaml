@@ -1,0 +1,49 @@
+# See the below links for more information:
+#   - https://argo-cd.readthedocs.io/en/stable/user-guide/application-specification/
+#   - https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/
+#   - https://argo-cd.readthedocs.io/en/stable/user-guide/multiple_sources/
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: local-path-provisioner
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: pks-bootstrapping
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/background
+spec:
+  project: admin-proj
+  sources:
+    - repoURL: https://github.com/rancher/local-path-provisioner.git
+      targetRevision: v0.0.32
+      path: deploy/chart/local-path-provisioner
+      helm:
+        releaseName: local-path-provisioner
+        valueFiles:
+          - $values/third-party/local-path-provisioner/values.yaml
+    - repoURL: https://github.com/PoolC/pks-bootstrapping.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      # Disable self-heal to enable faster debugging within the cluster.
+      selfHeal: false
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  info:
+    - name: "Local Path Provisioner GitHub Repository:"
+      value: https://github.com/rancher/local-path-provisioner
