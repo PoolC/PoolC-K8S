@@ -1,6 +1,8 @@
 # See:
 #   - https://github.com/rancher/local-path-provisioner/blob/v0.0.32/deploy/chart/local-path-provisioner/values.yaml
 
+namespaceOverride: local-path-storage
+
 storageClass:
   create: true
   provisionerName: rancher.io/local-path
