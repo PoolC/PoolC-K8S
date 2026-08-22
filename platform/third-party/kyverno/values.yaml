@@ -1,3 +1,5 @@
 config:
   excludeClusterRoles:
     - cluster-admin
+policyReportsCleanup:
+  enabled: false
