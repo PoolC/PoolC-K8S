@@ -47,6 +47,8 @@ ingressNginx:
   enabled: true
 
 kube-state-metrics:
+  metricLabelsAllowlist:
+    - pods=[*]
   prometheus:
     monitor:
       scrapeInterval: 11s
