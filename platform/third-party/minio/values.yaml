@@ -1,0 +1,59 @@
+mode: standalone
+
+existingSecret: minio-root-credentials
+
+replicas: 1
+drivesPerNode: 1
+
+persistence:
+  enabled: true
+  storageClass: local-path
+  size: 50Gi
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    memory: 1Gi
+
+nodeSelector:
+  poolc.org/node-pool: infra
+
+consoleService:
+  type: ClusterIP
+
+service:
+  type: ClusterIP
+
+makeBucketJob:
+  securityContext:
+    enabled: false
+  resources:
+    requests:
+      memory: 64Mi
+
+makeUserJob:
+  securityContext:
+    enabled: false
+  resources:
+    requests:
+      memory: 64Mi
+
+makePolicyJob:
+  securityContext:
+    enabled: false
+  resources:
+    requests:
+      memory: 64Mi
+
+customCommandsJob:
+  securityContext:
+    enabled: false
+  resources:
+    requests:
+      memory: 64Mi
+
+postJob:
+  nodeSelector:
+    poolc.org/node-pool: infra

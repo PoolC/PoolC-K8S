@@ -1,0 +1,42 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgresql
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: pks-bootstrapping
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/background
+spec:
+  project: admin-proj
+  sources:
+    - repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: 18.8.13
+      chart: postgresql
+      helm:
+        releaseName: postgresql
+        valueFiles:
+          - $values/third-party/postgresql/values.yaml
+    - repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: postgresql
+  syncPolicy:
+    automated:
+      enabled: false
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

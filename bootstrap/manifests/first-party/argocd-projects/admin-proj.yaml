@@ -27,6 +27,8 @@ spec:
     - https://grafana.github.io/helm-charts
     - https://fluent.github.io/helm-charts
     - https://charts.jetstack.io
+    - https://charts.bitnami.com/bitnami
+    - https://charts.min.io/
   destinations:
     - name: in-cluster
       namespace: '*'

@@ -1,0 +1,34 @@
+architecture: standalone
+
+auth:
+  enablePostgresUser: true
+  username: poolc
+  database: poolc
+  existingSecret: postgresql-auth
+  secretKeys:
+    adminPasswordKey: postgres-password
+    userPasswordKey: password
+
+primary:
+  nodeSelector:
+    poolc.org/node-pool: infra
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 20Gi
+  resourcesPreset: none
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+
+readReplicas:
+  replicaCount: 0
+
+backup:
+  enabled: false
+
+metrics:
+  enabled: false
