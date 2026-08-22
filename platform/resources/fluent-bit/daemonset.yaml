@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluent-bit
+  namespace: monitoring
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: fluent-bit
+  template:
+    metadata:
+      labels:
+        k8s-app: fluent-bit
+    spec:
+      containers:
+        - name: fluent-bit
+          image: fluent/fluent-bit:3.0
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /var/log
+              name: varlog
+            - mountPath: /fluent-bit/etc/
+              name: config
+            - mountPath: /var/lib/kubelet
+              name: varlibkubelet
+              readOnly: true
+      serviceAccountName: fluent-bit
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log
+        - name: config
+          configMap:
+            name: fluent-bit-config
+        - name: varlibkubelet
+          hostPath:
+            path: /var/lib/kubelet
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate

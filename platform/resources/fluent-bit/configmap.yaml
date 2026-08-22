@@ -1,0 +1,81 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-bit-config
+  namespace: monitoring
+data:
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush        5
+        Daemon       Off
+        Log_Level    info
+        Parsers_File parsers.conf
+
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/*ingress-nginx*.log
+        Tag               kube.nginx.*
+        Refresh_Interval  5
+        DB                /var/log/fluent-bit-buffers/tail.db
+
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/*.log
+        Exclude_Path      /var/log/containers/*_monitoring_*.log,/var/log/containers/*ingress-nginx*.log
+        Tag               kube.app.*
+        Parser            kube_custom
+        Refresh_Interval  5
+
+    [FILTER]
+        Name                kubernetes
+        Match               kube.app.*
+        Kube_Tag_Prefix     kube.app.var.log.containers.
+        Merge_Log           On
+        K8S-Logging.Parser  On
+
+    #[FILTER]
+    #    Name                grep
+    #    Match               kube.app.*
+    #    Exclude             $kubernetes['namespace_name'] (monitoring|ingress-nginx|kube-system)
+
+    [FILTER]
+        Name    parser
+        Match   kube.nginx.*
+        Parser  nginx_custom
+        Key_Name log
+        Preserve_Key On
+
+    [OUTPUT]
+        Name              loki
+        Match             kube.nginx.*
+        Host              loki.monitoring.svc.cluster.local
+        Port              3100
+        uri               /loki/api/v1/push
+        Labels            job=ingress-nginx, namespace=$namespace, service=$service_name
+
+    [OUTPUT]
+        Name              loki
+        Match             kube.app.*
+        Host              loki.monitoring.svc.cluster.local
+        Port              3100
+        uri               /loki/api/v1/push
+        Labels            job=app, namespace=$kubernetes['namespace_name'],pod=$kubernetes['pod_name']
+
+    #[OUTPUT]
+    #    Name stdout
+    #    Match kube.nginx.*
+  parsers.conf: |-
+    [PARSER]
+        Name        nginx_custom
+        Format      regex
+        Regex       ^(?<log>.*)namespace:(?<namespace>[^ ]+)\s+service:(?<service_name>[^ ]+)$
+        Time_Key    time
+        Time_Format %Y-%m-%dT%H:%M:%S.%L%z
+
+    [PARSER]
+        Name         kube_custom
+        Format       regex
+        Regex        ^(?<pod_name>[^_]+-[^_]+-[^_]+)_(?<namespace>[^_]+)_.+\.log$
+        Time_Key     time
+        Time_Format  %Y-%m-%dT%H:%M:%S.%L
