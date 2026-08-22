@@ -1,0 +1,43 @@
+global:
+  domain: argocd.dev.poolc.org
+
+configs:
+  cm:
+    accounts.poolini: apiKey, login
+    accounts.poolini.enabled: "true"
+    resource.customizations.health.argoproj.io_Application: |
+      hs = {}
+      hs.status = "Progressing"
+      hs.message = ""
+      if obj.status ~= nil then
+        if obj.status.health ~= nil then
+          hs.status = obj.status.health.status
+          if obj.status.health.message ~= nil then
+            hs.message = obj.status.health.message
+          end
+        end
+      end
+      return hs
+  params:
+    server.insecure: true
+  rbac:
+    policy.csv: |
+      p, poolini, applications, *, shared-proj/*, allow
+      p, poolini, applications, get, *, allow
+      p, poolini, applicationsets, *, shared-proj/*, allow
+      p, poolini, logs, get, shared-proj/*, allow
+      p, poolini, exec, create, shared-proj/*, allow
+      p, poolini, projects, get, *, allow
+
+server:
+  ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    enabled: true
+    hostname: argocd.dev.poolc.org
+    ingressClassName: nginx
+    path: /
+    pathType: Prefix
+    tls: false
+  ingressGrpc:
+    enabled: false

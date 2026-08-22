@@ -1,0 +1,50 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: shared-proj
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: pks-bootstrapping
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: A shared project for all PoolC users
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: '!argocd'
+      server: '*'
+    - namespace: '!cilium-secrets'
+      server: '*'
+    - namespace: '!ingress-nginx'
+      server: '*'
+    - namespace: '!kube-node-lease'
+      server: '*'
+    - namespace: '!kube-public'
+      server: '*'
+    - namespace: '!kube-system'
+      server: '*'
+    - namespace: '!local-path-storage'
+      server: '*'
+    - namespace: '!monitoring'
+      server: '*'
+    - namespace: '!kyverno'
+      server: '*'
+    - namespace: '!poolc-system'
+      server: '*'
+    - namespace: '!poolc-users*'
+      server: '*'
+    - namespace: '!istio-system'
+      server: '*'
+    - name: in-cluster
+      namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+  namespaceResourceBlacklist: []
+  orphanedResources:
+    warn: false

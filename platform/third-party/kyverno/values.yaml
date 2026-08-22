@@ -1,0 +1,3 @@
+config:
+  excludeClusterRoles:
+    - cluster-admin

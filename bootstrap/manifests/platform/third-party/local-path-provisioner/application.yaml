@@ -24,7 +24,7 @@ spec:
         releaseName: local-path-provisioner
         valueFiles:
           - $values/third-party/local-path-provisioner/values.yaml
-    - repoURL: https://github.com/PoolC/pks-bootstrapping.git
+    - repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
       targetRevision: main
       ref: values
   destination:

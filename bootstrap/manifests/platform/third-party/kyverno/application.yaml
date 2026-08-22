@@ -1,12 +1,8 @@
-# See the below links for more information:
-#   - https://argo-cd.readthedocs.io/en/stable/user-guide/application-specification/
-#   - https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/
-#   - https://argo-cd.readthedocs.io/en/stable/user-guide/multiple_sources/
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets
+  name: kyverno
   namespace: argocd
   labels:
     app.kubernetes.io/part-of: pks-bootstrapping
@@ -17,23 +13,23 @@ metadata:
 spec:
   project: admin-proj
   sources:
-    - repoURL: https://bitnami-labs.github.io/sealed-secrets
-      targetRevision: 2.17.7
-      chart: sealed-secrets
+    - repoURL: https://kyverno.github.io/kyverno/
+      targetRevision: 3.5.0
+      chart: kyverno
       helm:
-        releaseName: sealed-secrets
+        releaseName: kyverno
         valueFiles:
-          - $values/third-party/sealed-secrets/values.yaml
+          - $values/third-party/kyverno/values.yaml
     - repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
       targetRevision: main
       ref: values
   destination:
     server: https://kubernetes.default.svc
+    namespace: kyverno
   syncPolicy:
     automated:
-      enabled: true
-      prune: true
-      # Disable self-heal to enable faster debugging within the cluster.
+      enabled: false
+      prune: false
       selfHeal: false
     syncOptions:
       - ApplyOutOfSyncOnly=true
@@ -44,6 +40,3 @@ spec:
         duration: 5s
         factor: 2
         maxDuration: 3m
-  info:
-    - name: "Sealed Secrets GitHub Repository:"
-      value: https://github.com/bitnami-labs/sealed-secrets

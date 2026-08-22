@@ -1,0 +1,5 @@
+crds:
+  enabled: true
+
+nodeSelector:
+  poolc.org/node-pool: infra
