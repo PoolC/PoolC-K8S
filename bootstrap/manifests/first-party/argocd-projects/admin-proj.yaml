@@ -17,6 +17,7 @@ spec:
     - https://github.com/PoolC/pks-bootstrapping.git
     - https://github.com/rancher/local-path-provisioner.git
     - https://bitnami-labs.github.io/sealed-secrets
+    - https://bitnami.github.io/sealed-secrets
     - https://dl.gitea.com/charts/
     - https://kubernetes.github.io/ingress-nginx
     - https://kyverno.github.io/kyverno/
