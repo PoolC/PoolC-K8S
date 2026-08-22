@@ -3,3 +3,15 @@ crds:
 
 nodeSelector:
   poolc.org/node-pool: infra
+
+webhook:
+  nodeSelector:
+    poolc.org/node-pool: infra
+
+cainjector:
+  nodeSelector:
+    poolc.org/node-pool: infra
+
+startupapicheck:
+  nodeSelector:
+    poolc.org/node-pool: infra
