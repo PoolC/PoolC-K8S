@@ -64,7 +64,7 @@ nodeExporter:
 
 prometheus:
   prometheusSpec:
-    enableAdminAPI: true
+    enableAdminAPI: false
     retention: 30d
     scrapeInterval: 11s
     storageSpec:
