@@ -5,6 +5,8 @@ resource "cloudflare_zero_trust_tunnel_cloudflared" "pks_ssh" {
 }
 
 resource "cloudflare_dns_record" "pks_ssh" {
+  provider = cloudflare.dns
+
   zone_id = var.poolc_zone_id
   name    = var.pks_ssh_hostname
   type    = "CNAME"
@@ -24,6 +26,7 @@ resource "cloudflare_zero_trust_access_application" "pks_ssh" {
   skip_interstitial         = true
   allowed_idps              = []
   auto_redirect_to_identity = false
+  depends_on                = [cloudflare_zero_trust_organization.poolc]
 
   policies = [
     {

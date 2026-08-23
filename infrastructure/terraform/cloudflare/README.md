@@ -6,6 +6,7 @@ This directory manages only Cloudflare resources used by PKS.
 
 - `*.dev.poolc.org` DNS record for PKS ingress hosts
 - `pks.dev.poolc.org` SSH access through a PoolC-owned Cloudflare Tunnel
+- PoolC Zero Trust organization bootstrap
 - Cloudflare Access policy for PKS SSH administrators
 
 The root `poolc.org` site, production PoolC homepage records, AWS/CloudFront
@@ -17,7 +18,8 @@ the PKS bootstrapping repository.
 Do not commit API tokens. Provide a short-lived token at runtime:
 
 ```sh
-export CLOUDFLARE_API_TOKEN="..."
+export TF_VAR_cloudflare_dns_api_token="..."
+export TF_VAR_cloudflare_zero_trust_api_token="..."
 ```
 
 The dev ingress DNS scope needs a Cloudflare API token with:
@@ -28,6 +30,7 @@ The dev ingress DNS scope needs a Cloudflare API token with:
 The SSH tunnel scope additionally needs:
 
 - Account: Cloudflare Tunnel: Edit
+- Account: Access: Organizations: Edit
 - Account: Access: Apps and Policies: Edit
 
 ## Workflow

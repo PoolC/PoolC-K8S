@@ -9,4 +9,11 @@ terraform {
   }
 }
 
-provider "cloudflare" {}
+provider "cloudflare" {
+  api_token = var.cloudflare_zero_trust_api_token
+}
+
+provider "cloudflare" {
+  alias     = "dns"
+  api_token = var.cloudflare_dns_api_token
+}

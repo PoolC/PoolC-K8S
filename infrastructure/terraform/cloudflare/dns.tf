@@ -1,4 +1,6 @@
 resource "cloudflare_dns_record" "wildcard_dev_poolc_org" {
+  provider = cloudflare.dns
+
   zone_id = var.poolc_zone_id
   name    = "*.dev.poolc.org"
   type    = "A"

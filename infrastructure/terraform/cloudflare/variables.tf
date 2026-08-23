@@ -4,6 +4,18 @@ variable "account_id" {
   default     = "96d72c98332c7d9f23618f8ce634bd9e"
 }
 
+variable "cloudflare_zero_trust_api_token" {
+  description = "Cloudflare API token for Tunnel and Access resources."
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudflare_dns_api_token" {
+  description = "Cloudflare API token for poolc.org DNS resources."
+  type        = string
+  sensitive   = true
+}
+
 variable "poolc_zone_id" {
   description = "Cloudflare zone ID for poolc.org."
   type        = string
