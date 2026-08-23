@@ -48,3 +48,15 @@ The SSH tunnel is intended to replace the current personal-account tunnel used b
 the local `ssh pks` entry. Keep the old tunnel active until the PoolC tunnel has
 been applied, its connector token has been installed in Kubernetes, and SSH has
 been tested through `pks.dev.poolc.org`.
+
+## Current migration status
+
+- Created: `pks-ssh` Cloudflare Tunnel
+- Created: `pks.dev.poolc.org` DNS record
+- Created: remote tunnel config for `ssh://192.168.0.17:22`
+- Deployed: `pks-ssh-cloudflared` connector in Kubernetes
+- Blocked: Access application/policy creation until Zero Trust Access is enabled
+  in the PoolC Cloudflare dashboard
+
+After enabling Access, run `terraform plan` and `terraform apply` again from this
+directory to create the Zero Trust organization and SSH Access application.
