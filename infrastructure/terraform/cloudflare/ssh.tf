@@ -17,6 +17,8 @@ resource "cloudflare_dns_record" "pks_ssh" {
 }
 
 resource "cloudflare_zero_trust_access_application" "pks_ssh" {
+  count = var.enable_cloudflare_access ? 1 : 0
+
   account_id                = var.account_id
   name                      = "PKS SSH"
   domain                    = var.pks_ssh_hostname

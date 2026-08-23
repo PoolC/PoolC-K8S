@@ -5,9 +5,8 @@ This directory manages only Cloudflare resources used by PKS.
 ## Current scope
 
 - `*.dev.poolc.org` DNS record for PKS ingress hosts
-- `pks.dev.poolc.org` SSH access through a PoolC-owned Cloudflare Tunnel
-- PoolC Zero Trust organization bootstrap
-- Cloudflare Access policy for PKS SSH administrators
+- `pks.poolc.org` SSH tunnel endpoint through a PoolC-owned Cloudflare Tunnel
+- Optional PoolC Zero Trust organization and Cloudflare Access policy for PKS SSH administrators
 
 The root `poolc.org` site, production PoolC homepage records, AWS/CloudFront
 records, mail verification records, and unrelated service records belong outside
@@ -30,6 +29,9 @@ The dev ingress DNS scope needs a Cloudflare API token with:
 The SSH tunnel scope additionally needs:
 
 - Account: Cloudflare Tunnel: Edit
+
+If `enable_cloudflare_access = true`, the Access scope additionally needs:
+
 - Account: Access: Organizations: Edit
 - Account: Access: Apps and Policies: Edit
 
@@ -47,7 +49,7 @@ the existing record instead of attempting to create a duplicate.
 The SSH tunnel is intended to replace the current personal-account tunnel used by
 the local `ssh pks` entry. Keep the old tunnel active until the PoolC tunnel has
 been applied, its connector token has been installed in Kubernetes, and SSH has
-been tested through `pks.dev.poolc.org`.
+been tested through `pks.poolc.org`.
 
 ## Current migration status
 
@@ -55,8 +57,9 @@ been tested through `pks.dev.poolc.org`.
 - Created: `pks.dev.poolc.org` DNS record
 - Created: remote tunnel config for `ssh://192.168.0.17:22`
 - Deployed: `pks-ssh-cloudflared` connector in Kubernetes
-- Blocked: Access application/policy creation until Zero Trust Access is enabled
-  in the PoolC Cloudflare dashboard
+- Pending update: move SSH hostname from `pks.dev.poolc.org` to `pks.poolc.org`
+- Deferred: Access application/policy creation until Zero Trust Access is enabled
+  in the PoolC Cloudflare dashboard and `enable_cloudflare_access` is set to `true`
 
 After enabling Access, run `terraform plan` and `terraform apply` again from this
 directory to create the Zero Trust organization and SSH Access application.

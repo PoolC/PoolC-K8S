@@ -1,4 +1,6 @@
 resource "cloudflare_zero_trust_organization" "poolc" {
+  count = var.enable_cloudflare_access ? 1 : 0
+
   account_id       = var.account_id
   name             = "PoolC"
   auth_domain      = "poolc-pks"

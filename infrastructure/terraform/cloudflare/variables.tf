@@ -25,7 +25,7 @@ variable "poolc_zone_id" {
 variable "pks_ssh_hostname" {
   description = "Cloudflare Access hostname for SSH access to the PKS master node."
   type        = string
-  default     = "pks.dev.poolc.org"
+  default     = "pks.poolc.org"
 }
 
 variable "pks_ssh_origin" {
@@ -44,4 +44,10 @@ variable "pks_ssh_allowed_emails" {
   description = "Email identities allowed to use the PKS SSH Access application."
   type        = list(string)
   default     = ["poolc.official@gmail.com"]
+}
+
+variable "enable_cloudflare_access" {
+  description = "Create Cloudflare Zero Trust Access organization and SSH application."
+  type        = bool
+  default     = false
 }
