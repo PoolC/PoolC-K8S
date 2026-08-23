@@ -6,7 +6,6 @@ This directory manages only Cloudflare resources used by PKS.
 
 - `*.dev.poolc.org` DNS record for PKS ingress hosts
 - `pks.poolc.org` SSH tunnel endpoint through a PoolC-owned Cloudflare Tunnel
-- Optional PoolC Zero Trust organization and Cloudflare Access policy for PKS SSH administrators
 
 The root `poolc.org` site, production PoolC homepage records, AWS/CloudFront
 records, mail verification records, and unrelated service records belong outside
@@ -18,7 +17,7 @@ Do not commit API tokens. Provide a short-lived token at runtime:
 
 ```sh
 export TF_VAR_cloudflare_dns_api_token="..."
-export TF_VAR_cloudflare_zero_trust_api_token="..."
+export TF_VAR_cloudflare_tunnel_api_token="..."
 ```
 
 The dev ingress DNS scope needs a Cloudflare API token with:
@@ -29,11 +28,6 @@ The dev ingress DNS scope needs a Cloudflare API token with:
 The SSH tunnel scope additionally needs:
 
 - Account: Cloudflare Tunnel: Edit
-
-If `enable_cloudflare_access = true`, the Access scope additionally needs:
-
-- Account: Access: Organizations: Edit
-- Account: Access: Apps and Policies: Edit
 
 ## Workflow
 
@@ -54,12 +48,10 @@ been tested through `pks.poolc.org`.
 ## Current migration status
 
 - Created: `pks-ssh` Cloudflare Tunnel
-- Created: `pks.dev.poolc.org` DNS record
+- Created: `pks.poolc.org` DNS record
 - Created: remote tunnel config for `ssh://192.168.0.17:22`
 - Deployed: `pks-ssh-cloudflared` connector in Kubernetes
-- Pending update: move SSH hostname from `pks.dev.poolc.org` to `pks.poolc.org`
-- Deferred: Access application/policy creation until Zero Trust Access is enabled
-  in the PoolC Cloudflare dashboard and `enable_cloudflare_access` is set to `true`
+- Verified: local `ssh pks` reaches `poolc@poolc-n1` through `pks.poolc.org`
 
 After enabling Access, run `terraform plan` and `terraform apply` again from this
 directory to create the Zero Trust organization and SSH Access application.

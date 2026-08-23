@@ -4,8 +4,8 @@ variable "account_id" {
   default     = "96d72c98332c7d9f23618f8ce634bd9e"
 }
 
-variable "cloudflare_zero_trust_api_token" {
-  description = "Cloudflare API token for Tunnel and Access resources."
+variable "cloudflare_tunnel_api_token" {
+  description = "Cloudflare API token for Tunnel resources."
   type        = string
   sensitive   = true
 }
@@ -23,7 +23,7 @@ variable "poolc_zone_id" {
 }
 
 variable "pks_ssh_hostname" {
-  description = "Cloudflare Access hostname for SSH access to the PKS master node."
+  description = "Cloudflare Tunnel hostname for SSH access to the PKS master node."
   type        = string
   default     = "pks.poolc.org"
 }
@@ -32,22 +32,4 @@ variable "pks_ssh_origin" {
   description = "Origin SSH endpoint reachable from the in-cluster cloudflared connector."
   type        = string
   default     = "192.168.0.17:22"
-}
-
-variable "pks_ssh_unix_usernames" {
-  description = "Unix usernames allowed by the Cloudflare Access SSH policy."
-  type        = list(string)
-  default     = ["poolc"]
-}
-
-variable "pks_ssh_allowed_emails" {
-  description = "Email identities allowed to use the PKS SSH Access application."
-  type        = list(string)
-  default     = ["poolc.official@gmail.com"]
-}
-
-variable "enable_cloudflare_access" {
-  description = "Create Cloudflare Zero Trust Access organization and SSH application."
-  type        = bool
-  default     = false
 }

@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "cloudflare" {
-  api_token = var.cloudflare_zero_trust_api_token
+  api_token = var.cloudflare_tunnel_api_token
 }
 
 provider "cloudflare" {
