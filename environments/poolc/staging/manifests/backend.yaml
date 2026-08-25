@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poolc-backend
+  labels:
+    app.kubernetes.io/name: poolc-backend
+    app.kubernetes.io/part-of: poolc-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: poolc-backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: poolc-backend
+        app.kubernetes.io/part-of: poolc-staging
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        poolc.org/node-pool: infra
+      containers:
+        - name: backend
+          image: git.poolc.org/poolc-web/backend:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: postgresql.postgresql.svc.cluster.local:5432
+            - name: DB_NAME
+              value: poolc_staging
+            - name: DB_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: poolc-staging-app
+                  key: db-username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: poolc-staging-app
+                  key: db-password
+            - name: PROJECT_NAME_HERE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: poolc-staging-app
+                  key: jwt-secret
+            - name: EXPIRE_LENGTH_IN_MILLISECONDS
+              value: "3600000"
+            - name: FILE_DIR
+              value: /data/files/
+            - name: EMAIL_ADDRESS
+              value: staging@poolc.org
+            - name: EMAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: poolc-staging-app
+                  key: email-password
+            - name: NAVER_BOOK_API_URL
+              value: https://openapi.naver.com/v1/search/book.json
+            - name: NAVER_BOOK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: poolc-staging-app
+                  key: naver-client-id
+            - name: NAVER_BOOK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: poolc-staging-app
+                  key: naver-client-secret
+            - name: KUBERNETES_API_KEY
+              value: staging-not-configured
+            - name: GITEA_PROXY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: poolc-staging-app
+                  key: gitea-proxy-api-key
+            - name: GITEA_LOGIN_TICKET_WEB_LOGIN_URL
+              value: https://git.poolc.org/_poolc_login
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: files
+              mountPath: /data/files
+      volumes:
+        - name: files
+          persistentVolumeClaim:
+            claimName: poolc-staging-files
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poolc-backend
+  labels:
+    app.kubernetes.io/name: poolc-backend
+    app.kubernetes.io/part-of: poolc-staging
+spec:
+  selector:
+    app.kubernetes.io/name: poolc-backend
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
