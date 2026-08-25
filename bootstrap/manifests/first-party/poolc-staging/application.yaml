@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: poolc-staging
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: pks-bootstrapping
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/background
+spec:
+  project: poolc-staging-proj
+  source:
+    repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/poolc-staging.git
+    targetRevision: main
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: poolc-staging
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  info:
+    - name: Staging
+      value: https://dev.poolc.org

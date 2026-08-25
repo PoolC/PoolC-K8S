@@ -1,0 +1,26 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: poolc-staging-proj
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: pks-bootstrapping
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Staging applications for PoolC services
+  sourceRepos:
+    - http://gitea-http.gitea.svc.cluster.local:3000/PKS/poolc-staging.git
+  destinations:
+    - name: in-cluster
+      namespace: poolc-staging
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+  namespaceResourceBlacklist: []
+  orphanedResources:
+    warn: false
