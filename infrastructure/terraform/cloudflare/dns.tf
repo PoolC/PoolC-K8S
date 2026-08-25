@@ -6,8 +6,20 @@ resource "cloudflare_dns_record" "wildcard_dev_poolc_org" {
   type    = "A"
   content = "165.132.131.121"
   ttl     = 1
-  proxied = false
+  proxied = true
   comment = "vpn용 풀씨 dns 설정"
+}
+
+resource "cloudflare_dns_record" "dev_poolc_org" {
+  provider = cloudflare.dns
+
+  zone_id = var.poolc_zone_id
+  name    = "dev.poolc.org"
+  type    = "A"
+  content = var.pks_ingress_ipv4
+  ttl     = 1
+  proxied = true
+  comment = "PKS PoolC staging ingress"
 }
 
 resource "cloudflare_dns_record" "git_poolc_org" {
@@ -18,7 +30,7 @@ resource "cloudflare_dns_record" "git_poolc_org" {
   type    = "A"
   content = var.pks_ingress_ipv4
   ttl     = 1
-  proxied = false
+  proxied = true
   comment = "PKS Gitea ingress"
 }
 
