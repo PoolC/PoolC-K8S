@@ -8,7 +8,7 @@ This directory manages only Cloudflare resources used by PKS.
 - official PKS service DNS records:
   - `git.poolc.org`
   - `argocd.poolc.org`
-  - `mon.poolc.org`
+  - `grafana.poolc.org`
 - `pks.poolc.org` SSH tunnel endpoint through a PoolC-owned Cloudflare Tunnel
 
 The root `poolc.org` site, production PoolC homepage records, AWS/CloudFront

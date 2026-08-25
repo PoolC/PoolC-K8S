@@ -34,11 +34,11 @@ resource "cloudflare_dns_record" "argocd_poolc_org" {
   comment = "PKS Argo CD ingress"
 }
 
-resource "cloudflare_dns_record" "mon_poolc_org" {
+resource "cloudflare_dns_record" "grafana_poolc_org" {
   provider = cloudflare.dns
 
   zone_id = var.poolc_zone_id
-  name    = "mon.poolc.org"
+  name    = "grafana.poolc.org"
   type    = "A"
   content = var.pks_ingress_ipv4
   ttl     = 1
