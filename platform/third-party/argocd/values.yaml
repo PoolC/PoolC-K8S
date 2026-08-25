@@ -1,5 +1,5 @@
 global:
-  domain: argocd.dev.poolc.org
+  domain: argocd.poolc.org
 
 configs:
   cm:
@@ -34,7 +34,10 @@ server:
     annotations:
       nginx.ingress.kubernetes.io/backend-protocol: HTTP
     enabled: true
-    hostname: argocd.dev.poolc.org
+    hostname: argocd.poolc.org
+    extraHosts:
+      - name: argocd.dev.poolc.org
+        path: /
     ingressClassName: nginx
     path: /
     pathType: Prefix

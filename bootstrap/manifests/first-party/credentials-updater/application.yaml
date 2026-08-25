@@ -35,4 +35,4 @@ spec:
         maxDuration: 3m
   info:
     - name: "PKS Credentials Updater Repository:"
-      value: http://git.dev.poolc.org/PKS/credentials-updater
+      value: http://git.poolc.org/PKS/credentials-updater

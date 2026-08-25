@@ -29,6 +29,7 @@ grafana:
       kubernetes.io/ingress.class: nginx
     enabled: true
     hosts:
+      - mon.poolc.org
       - mon.dev.poolc.org
     ingressClassName: nginx
     path: /
