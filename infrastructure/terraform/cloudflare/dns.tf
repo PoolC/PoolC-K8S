@@ -30,7 +30,7 @@ resource "cloudflare_dns_record" "git_poolc_org" {
   type    = "A"
   content = var.pks_ingress_ipv4
   ttl     = 1
-  proxied = true
+  proxied = false
   comment = "PKS Gitea ingress"
 }
 
