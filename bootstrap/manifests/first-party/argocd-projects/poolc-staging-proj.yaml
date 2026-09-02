@@ -13,7 +13,7 @@ metadata:
 spec:
   description: Staging applications for PoolC services
   sourceRepos:
-    - http://gitea-http.gitea.svc.cluster.local:3000/PKS/poolc-staging.git
+    - https://github.com/PoolC/PKS.git
   destinations:
     - name: in-cluster
       namespace: poolc-staging

@@ -19,8 +19,8 @@ spec:
       helm:
         releaseName: cert-manager
         valueFiles:
-          - $values/third-party/cert-manager/values.yaml
-    - repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
+          - $values/platform/third-party/cert-manager/values.yaml
+    - repoURL: https://github.com/PoolC/PKS.git
       targetRevision: main
       ref: values
   destination:

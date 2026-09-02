@@ -13,7 +13,7 @@ metadata:
 spec:
   description: A project for PKS-specific system-wide applications
   sourceRepos:
-    - http://gitea-http.gitea.svc.cluster.local:3000/PKS/credentials-updater.git
+    - https://github.com/PoolC/PKS.git
     - https://github.com/PoolC/*
   destinations:
     - name: in-cluster

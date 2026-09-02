@@ -13,9 +13,9 @@ metadata:
 spec:
   project: admin-proj
   source:
-    repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
+    repoURL: https://github.com/PoolC/PKS.git
     targetRevision: main
-    path: resources/cloudflared
+    path: platform/resources/cloudflared
   destination:
     server: https://kubernetes.default.svc
     namespace: cloudflared

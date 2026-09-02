@@ -13,9 +13,9 @@ metadata:
 spec:
   project: poolc-staging-proj
   source:
-    repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/poolc-staging.git
+    repoURL: https://github.com/PoolC/PKS.git
     targetRevision: main
-    path: manifests
+    path: environments/poolc/staging/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: poolc-staging

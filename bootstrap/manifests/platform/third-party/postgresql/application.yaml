@@ -19,8 +19,8 @@ spec:
       helm:
         releaseName: postgresql
         valueFiles:
-          - $values/third-party/postgresql/values.yaml
-    - repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
+          - $values/platform/third-party/postgresql/values.yaml
+    - repoURL: https://github.com/PoolC/PKS.git
       targetRevision: main
       ref: values
   destination:

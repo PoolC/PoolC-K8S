@@ -13,9 +13,9 @@ metadata:
 spec:
   project: poolc-system-proj
   source:
-    repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/credentials-updater.git
-    targetRevision: HEAD
-    path: manifests
+    repoURL: https://github.com/PoolC/PKS.git
+    targetRevision: main
+    path: services/credentials-updater/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: poolc-system
@@ -35,4 +35,4 @@ spec:
         maxDuration: 3m
   info:
     - name: "PKS Credentials Updater Repository:"
-      value: http://git.poolc.org/PKS/credentials-updater
+      value: https://github.com/PoolC/PKS/tree/main/services/credentials-updater

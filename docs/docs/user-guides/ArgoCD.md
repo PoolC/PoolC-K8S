@@ -505,7 +505,7 @@ git commit -m "chore(ci): add workflow for CI/CD"
    ```bash
    sed "s/Hello, world/Hello, PoolC/" app/index.html > app/index.tmp \
        && mv app/index.tmp app/index.html
-   
+
    git commit -am "feat: say hello to PoolC"
    git pull --rebase
    git push

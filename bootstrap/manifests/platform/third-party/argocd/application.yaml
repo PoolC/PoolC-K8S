@@ -19,8 +19,8 @@ spec:
       helm:
         releaseName: argocd
         valueFiles:
-          - $values/third-party/argocd/values.yaml
-    - repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
+          - $values/platform/third-party/argocd/values.yaml
+    - repoURL: https://github.com/PoolC/PKS.git
       targetRevision: main
       ref: values
   destination:

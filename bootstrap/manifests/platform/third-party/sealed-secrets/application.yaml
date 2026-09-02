@@ -23,8 +23,8 @@ spec:
       helm:
         releaseName: sealed-secrets
         valueFiles:
-          - $values/third-party/sealed-secrets/values.yaml
-    - repoURL: http://gitea-http.gitea.svc.cluster.local:3000/PKS/bootstrapping.git
+          - $values/platform/third-party/sealed-secrets/values.yaml
+    - repoURL: https://github.com/PoolC/PKS.git
       targetRevision: main
       ref: values
   destination:
