@@ -13,7 +13,7 @@ metadata:
 spec:
   project: admin-proj
   source:
-    repoURL: https://github.com/PoolC/PKS.git
+    repoURL: https://github.com/PoolC-Web/PKS.git
     targetRevision: main
     path: platform/resources/fluent-bit
   destination:

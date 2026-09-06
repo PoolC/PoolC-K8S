@@ -20,7 +20,7 @@ spec:
         releaseName: ingress-nginx
         valueFiles:
           - $values/platform/third-party/ingress-nginx/values.yaml
-    - repoURL: https://github.com/PoolC/PKS.git
+    - repoURL: https://github.com/PoolC-Web/PKS.git
       targetRevision: main
       ref: values
   destination:

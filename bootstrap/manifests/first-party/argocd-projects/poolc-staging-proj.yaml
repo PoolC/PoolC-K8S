@@ -13,7 +13,7 @@ metadata:
 spec:
   description: Staging applications for PoolC services
   sourceRepos:
-    - https://github.com/PoolC/PKS.git
+    - https://github.com/PoolC-Web/PKS.git
   destinations:
     - name: in-cluster
       namespace: poolc-staging

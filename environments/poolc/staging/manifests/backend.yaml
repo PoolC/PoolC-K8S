@@ -21,7 +21,7 @@ spec:
         poolc.org/node-pool: infra
       containers:
         - name: backend
-          image: git.poolc.org/poolc-web/backend:latest
+          image: ghcr.io/poolc-web/poolc-be:dev
           imagePullPolicy: Always
           ports:
             - name: http
