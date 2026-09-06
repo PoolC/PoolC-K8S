@@ -1,4 +1,4 @@
-# PKS
+# PoolC-K8S
 
 GitOps configuration and supporting services for PoolC Kubernetes Service.
 
@@ -7,9 +7,9 @@ GitOps configuration and supporting services for PoolC Kubernetes Service.
 - `bootstrap/`: Argo CD root application and child application manifests.
 - `platform/`: cluster-wide platform services and their configuration.
 - `environments/poolc/staging/`: PoolC staging deployment manifests.
-- `services/credentials-updater/`: PKS account synchronization service.
+- `services/credentials-updater/`: PoolC-K8S account synchronization service.
 - `infrastructure/terraform/`: DNS and infrastructure configuration.
-- `docs/`: PKS operation and user documentation.
+- `docs/`: PoolC-K8S operation and user documentation.
 
 ## Bootstrap
 
