@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: frontend
-          image: ghcr.io/poolc-web/poolc-fe:dev
+          image: ghcr.io/poolc-web/poolc-fe:sha-250791dc8db4439d664474c998a8703ad60cd814
           imagePullPolicy: Always
           ports:
             - name: http
