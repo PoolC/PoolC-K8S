@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/PoolC/PoolC-K8S.git
     targetRevision: main
-    path: platform/first-party/cert-manager-config
+    path: platform/resources/cert-manager-config
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
