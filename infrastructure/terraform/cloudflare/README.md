@@ -6,6 +6,7 @@ This directory manages only Cloudflare resources used by PKS.
 
 - `*.dev.poolc.org` DNS record for PKS ingress hosts
 - official PKS service DNS records:
+  - `git.poolc.org` (reserved legacy hostname; Gitea service is retired)
   - `argocd.poolc.org`
   - `grafana.poolc.org`
 - `pks.poolc.org` SSH tunnel endpoint through a PoolC-owned Cloudflare Tunnel
