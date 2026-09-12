@@ -25,7 +25,6 @@ PoolC Kubernetes Service의 GitOps 인프라 구성
 
 - `bootstrap/` — Argo CD root application
 - `platform/` — cluster-wide platform services
-- `environments/poolc/staging/` — PoolC staging manifests
 - `services/` — supporting services
 - `automation/` — operational automation
 - `infrastructure/terraform/` — DNS and infrastructure code
