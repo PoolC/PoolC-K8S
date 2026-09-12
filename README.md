@@ -19,7 +19,7 @@ PoolC Kubernetes Service의 GitOps 인프라 구성
 
 | GitOps | Platform | Services |
 | :---: | :---: | :---: |
-| Argo CD bootstrap · application manifests | cluster-wide services · configuration | staging workloads · credentials updater |
+| Argo CD bootstrap · application manifests | cluster-wide services · configuration | credentials updater |
 
 ## Layout
 
@@ -45,7 +45,7 @@ Argo CD repository credential와 마이그레이션 계획이 준비된 뒤에�
 
 - Terraform state·변수 파일은 Git에 저장하지 않습니다.
 - 배포 비밀값은 CI/CD와 외부 secret store에서 관리합니다.
-- staging image·DNS 변경은 검토된 GitOps 변경으로만 반영합니다.
+- 플랫폼·DNS 변경은 검토된 GitOps 변경으로만 반영합니다.
 
 ## Contributors
 

@@ -22,18 +22,6 @@ resource "cloudflare_dns_record" "dev_poolc_org" {
   comment = "PKS PoolC staging ingress"
 }
 
-resource "cloudflare_dns_record" "git_poolc_org" {
-  provider = cloudflare.dns
-
-  zone_id = var.poolc_zone_id
-  name    = "git.poolc.org"
-  type    = "A"
-  content = var.pks_ingress_ipv4
-  ttl     = 1
-  proxied = false
-  comment = "PKS Gitea ingress"
-}
-
 resource "cloudflare_dns_record" "argocd_poolc_org" {
   provider = cloudflare.dns
 
