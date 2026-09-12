@@ -26,6 +26,19 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      namespace: kube-system
+      name: cilium-ca
+      jsonPointers:
+        - /data
+    - group: ""
+      kind: Secret
+      namespace: kube-system
+      name: hubble-server-certs
+      jsonPointers:
+        - /data
   syncPolicy:
     automated:
       enabled: false
@@ -34,6 +47,7 @@ spec:
     syncOptions:
       - ApplyOutOfSyncOnly=true
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
     retry:
       limit: 5
       backoff:
