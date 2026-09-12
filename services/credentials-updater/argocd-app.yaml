@@ -14,7 +14,7 @@ metadata:
 spec:
   project: poolc-system-proj
   source:
-    repoURL: https://github.com/PoolC-Web/PKS.git
+    repoURL: https://github.com/PoolC/PoolC-K8S.git
     targetRevision: main
     path: services/credentials-updater/manifests
   destination:
@@ -44,4 +44,4 @@ spec:
         maxDuration: 3m
   info:
     - name: "See:"
-      value: "https://github.com/PoolC-Web/PKS/tree/main/services/credentials-updater"
+      value: "https://github.com/PoolC/PoolC-K8S/tree/main/services/credentials-updater"

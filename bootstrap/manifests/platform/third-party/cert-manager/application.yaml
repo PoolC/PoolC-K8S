@@ -20,7 +20,7 @@ spec:
         releaseName: cert-manager
         valueFiles:
           - $values/platform/third-party/cert-manager/values.yaml
-    - repoURL: https://github.com/PoolC-Web/PKS.git
+    - repoURL: https://github.com/PoolC/PoolC-K8S.git
       targetRevision: main
       ref: values
   destination:

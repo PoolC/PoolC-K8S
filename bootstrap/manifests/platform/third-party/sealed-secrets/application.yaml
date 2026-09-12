@@ -24,7 +24,7 @@ spec:
         releaseName: sealed-secrets
         valueFiles:
           - $values/platform/third-party/sealed-secrets/values.yaml
-    - repoURL: https://github.com/PoolC-Web/PKS.git
+    - repoURL: https://github.com/PoolC/PoolC-K8S.git
       targetRevision: main
       ref: values
   destination:

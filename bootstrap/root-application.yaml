@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/PoolC-Web/PKS.git
+    repoURL: https://github.com/PoolC/PoolC-K8S.git
     targetRevision: main
     path: bootstrap/manifests
     directory:

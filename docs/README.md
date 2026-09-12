@@ -8,7 +8,7 @@ PKS는 2024년 11월 30일, PoolC 홈커밍 행사 중 최유찬 회원과 양�
 
 ## 문서 모음
 
-- [사용자 가이드](https://github.com/PoolC-Web/PKS/tree/main/docs/docs/user-guides)
+- [사용자 가이드](https://github.com/PoolC/PoolC-K8S/tree/main/docs/docs/user-guides)
 - [운영자 가이드](./docs/admin-guide.md)
 - [PKS에 기여하기](./docs/contributing.md)
 - [아키텍처 개요](./docs/architecture.md)
@@ -37,7 +37,7 @@ PKS는 다음과 같은 고민에서 시작됐습니다.
 ## 관련 레포지토리
 
 - PKS 세미나: TBD
-- [PKS Credentials Updater](https://github.com/PoolC-Web/PKS/tree/main/services/credentials-updater):
+- [PKS Credentials Updater](https://github.com/PoolC/PoolC-K8S/tree/main/services/credentials-updater):
   PKS 클러스터의 유저 정보를 일정 주기로 PoolC API 서버와 동기화하는 어플리케이션
 - [PKS Bootstrapping](https://github.com/PoolC/pks-bootstrapping):
   PKS 클러스터 부트스트래핑을 위한 manifest 모음

@@ -13,7 +13,7 @@ metadata:
 spec:
   description: A project for system-wide applications
   sourceRepos:
-    - https://github.com/PoolC-Web/PKS.git
+    - https://github.com/PoolC/PoolC-K8S.git
     - https://github.com/rancher/local-path-provisioner.git
     - https://bitnami-labs.github.io/sealed-secrets
     - https://bitnami.github.io/sealed-secrets

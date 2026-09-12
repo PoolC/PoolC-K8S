@@ -22,7 +22,7 @@ spec:
         releaseName: kyverno
         valueFiles:
           - $values/platform/third-party/kyverno/values.yaml
-    - repoURL: https://github.com/PoolC-Web/PKS.git
+    - repoURL: https://github.com/PoolC/PoolC-K8S.git
       targetRevision: main
       ref: values
   destination:

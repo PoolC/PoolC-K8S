@@ -24,7 +24,7 @@ spec:
         releaseName: local-path-provisioner
         valueFiles:
           - $values/platform/third-party/local-path-provisioner/values.yaml
-    - repoURL: https://github.com/PoolC-Web/PKS.git
+    - repoURL: https://github.com/PoolC/PoolC-K8S.git
       targetRevision: main
       ref: values
   destination:
