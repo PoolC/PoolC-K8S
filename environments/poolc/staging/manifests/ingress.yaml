@@ -27,8 +27,14 @@ metadata:
   name: poolc-staging-web
   labels:
     app.kubernetes.io/part-of: poolc-staging
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns01
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - dev.poolc.org
+      secretName: poolc-staging-dev-tls
   rules:
     - host: dev.poolc.org
       http:
