@@ -10,10 +10,6 @@ terraform {
 }
 
 provider "cloudflare" {
-  api_token = var.cloudflare_tunnel_api_token
-}
-
-provider "cloudflare" {
   alias     = "dns"
   api_token = var.cloudflare_dns_api_token
 }

@@ -1,15 +1,3 @@
-variable "account_id" {
-  description = "Cloudflare account ID for PoolC."
-  type        = string
-  default     = "96d72c98332c7d9f23618f8ce634bd9e"
-}
-
-variable "cloudflare_tunnel_api_token" {
-  description = "Cloudflare API token for Tunnel resources."
-  type        = string
-  sensitive   = true
-}
-
 variable "cloudflare_dns_api_token" {
   description = "Cloudflare API token for poolc.org DNS resources."
   type        = string
@@ -26,16 +14,4 @@ variable "pks_ingress_ipv4" {
   description = "Public IPv4 address for PKS ingress-nginx."
   type        = string
   default     = "165.132.131.121"
-}
-
-variable "pks_ssh_hostname" {
-  description = "Cloudflare Tunnel hostname for SSH access to the PKS master node."
-  type        = string
-  default     = "pks.poolc.org"
-}
-
-variable "pks_ssh_origin" {
-  description = "Origin SSH endpoint reachable from the in-cluster cloudflared connector."
-  type        = string
-  default     = "192.168.0.17:22"
 }
