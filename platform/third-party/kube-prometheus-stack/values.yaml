@@ -31,14 +31,12 @@ grafana:
     enabled: true
     hosts:
       - grafana.poolc.org
-      - mon.dev.poolc.org
     ingressClassName: nginx
     path: /
     pathType: Prefix
     tls:
       - hosts:
           - grafana.poolc.org
-          - mon.dev.poolc.org
         secretName: kube-prometheus-stack-grafana-tls
   replicaCount: 2
   service:
