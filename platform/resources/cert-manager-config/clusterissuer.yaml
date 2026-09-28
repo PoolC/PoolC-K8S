@@ -11,7 +11,12 @@ spec:
       name: letsencrypt-dns01-account-key
     solvers:
       - dns01:
-          cloudflare:
-            apiTokenSecretRef:
-              name: cloudflare-dns-api-token
-              key: api-token
+          route53:
+            region: ap-northeast-2
+            hostedZoneID: Z02544952040FYJF2VAM0
+            accessKeyIDSecretRef:
+              name: route53-dns-api-credentials
+              key: access-key-id
+            secretAccessKeySecretRef:
+              name: route53-dns-api-credentials
+              key: secret-access-key
