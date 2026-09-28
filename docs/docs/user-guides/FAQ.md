@@ -19,7 +19,7 @@ Ingress 리소스를 생성하려고 했기 때문입니다.
 Error from server (BadRequest):
 error when creating "foo.yaml":
 admission webhook "validate.nginx.ingress.kubernetes.io" denied the request:
-host "ci-cd.demo.dev.poolc.org" and path "/" is already defined in ingress pks-argocd-demo/demo-server
+host "ci-cd.demo.internal.poolc" and path "/" is already defined in ingress pks-argocd-demo/demo-server
 ```
 
 Ingress를 생성하기 이전에는 `kubectl get ingress -A` 명령어를 통해 현재 사용 중인 도메인 이름을 확인한 뒤,
@@ -28,9 +28,9 @@ Ingress를 생성하기 이전에는 `kubectl get ingress -A` 명령어를 통�
 ```console
 $ kubectl get ingress -A
 NAMESPACE         NAME                            CLASS   HOSTS                             ADDRESS      PORTS   AGE
-argocd            argocd-server                   nginx   argocd.dev.poolc.org              10.99.76.2   80      88d
-argocd            argocd-server-grpc              nginx   grpc.argocd.dev.poolc.org         10.99.76.2   80      88d
-default           domain-routing-ingress          nginx   a.dev.poolc.org,b.dev.poolc.org   10.99.76.2   80      104d
-monitoring        kube-prometheus-stack-grafana   nginx   mon.dev.poolc.org                 10.99.76.2   80      47h
-pks-argocd-demo   demo-server                     nginx   ci-cd.demo.dev.poolc.org          10.99.76.2   80      35d
+argocd            argocd-server                   nginx   argocd.poolc.org                  10.99.76.2   80      88d
+monitoring        kube-prometheus-stack-grafana   nginx   grafana.poolc.org                 10.99.76.2   80      47h
 ```
+
+`*.dev.poolc.org` 와일드카드 DNS는 더 이상 제공되지 않습니다. 실습용 Ingress는 내부 네트워크에서
+`kubectl port-forward`로 확인하거나, 별도 도메인을 명시적으로 준비해 사용하세요.

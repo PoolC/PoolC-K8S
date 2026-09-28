@@ -211,7 +211,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: $SUBDOMAIN_NAME.dev.poolc.org
+    - host: $SUBDOMAIN_NAME.internal.poolc
       http:
         paths:
           - path: /
@@ -438,7 +438,7 @@ git commit -m "chore(ci): add workflow for CI/CD"
    ![K8s item in the main nav bar](../../assets/poolc-web-nav.webp)
    ![Argo CD username & password in PoolC homepage](../../assets/argocd-username-password.webp)
 
-1. [http://argocd.dev.poolc.org](http://argocd.dev.poolc.org)에 접속한 뒤,
+1. [https://argocd.poolc.org](https://argocd.poolc.org)에 접속한 뒤,
    풀씨 홈페이지에서 확인한 username과 password를 이용해 로그인해주세요.
 
 2. "+ New App"을 클릭해 새로운 애플리케이션을 생성할 준비를 합니다.
@@ -548,8 +548,8 @@ git commit -m "chore(ci): add workflow for CI/CD"
 ### 전체 실습 실행 결과물
 
 - [PoolC/pks-argocd-demo GitHub 레포지토리](https://github.com/PoolC/pks-argocd-demo)
-- [pks-argocd-demo Application web UI](http://argocd.dev.poolc.org/applications/argocd/pks-argocd-demo)
-- [배포된 Python 웹 서버](http://pks-argocd-demo.dev.poolc.org)
+- [pks-argocd-demo Application web UI](https://argocd.poolc.org/applications/argocd/pks-argocd-demo)
+- 배포된 Python 웹 서버는 내부 네트워크에서 `kubectl port-forward`로 확인
 
 ### GitOps와 Argo CD
 

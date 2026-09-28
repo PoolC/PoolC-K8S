@@ -66,7 +66,7 @@ poolc-users          Active   33h
 
 아래의 링크를 통해 정상적으로 접속되는지 확인해 주세요.
 
-[http://mon.dev.poolc.org](http://mon.dev.poolc.org)
+[https://grafana.poolc.org](https://grafana.poolc.org)
 
 > [!WARNING]
 > 페이지에 접속할 수 없다면 교내망에 연결되어 있지 않았을 가능성이 높습니다.
@@ -178,7 +178,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: $SUBDOMAIN_NAME.dev.poolc.org
+    - host: $SUBDOMAIN_NAME.internal.poolc
       http:
         paths:
           - path: /
@@ -216,16 +216,17 @@ replicaset.apps/nginx-deployment-698d9748f5   1         1         1       23m
 
 #### 로그 생성하기
 
-먼저, 아래 명령어를 실행하거나 웹 브라우저에서 `$SUBDOMAIN_NAME`.dev.poolc.org 주소로 접속하여 로그를
-생성해주세요. 여러 번 접속하면 더 많은 로그를 확인할 수 있습니다.
+먼저, 아래 명령어로 서비스에 포트 포워딩을 연결해 로그를 생성해주세요. 여러 번 접속하면 더 많은 로그를
+확인할 수 있습니다.
 
 ```sh
-curl $SUBDOMAIN_NAME.dev.poolc.org
+kubectl -n $NAMESPACE_NAME port-forward service/$SERVICE_NAME 8080:80
+curl http://localhost:8080
 ```
 
 #### Grafana에서 로그 확인하기
 
-1. 모니터링 페이지([http://mon.dev.poolc.org](http://mon.dev.poolc.org))에 접속한 뒤, 좌측 메뉴에서
+1. 모니터링 페이지([https://grafana.poolc.org](https://grafana.poolc.org))에 접속한 뒤, 좌측 메뉴에서
    "Dashboards" 클릭하기
 
    <p align="center">
@@ -269,7 +270,7 @@ curl $SUBDOMAIN_NAME.dev.poolc.org
    [access log](#애플리케이션-로그와-access-로그의-차이)를 보여줍니다.
 
    - "namespace"와 "service" 필터를 알맞게 선택하면, 우리가 생성한
-     웹 서버(`$SUBDOMAIN_NAME`.dev.poolc.org)로 들어온 요청 기록을 확인할 수 있습니다.
+     웹 서버로 들어온 요청 기록을 확인할 수 있습니다.
 
    <p align="center">
        <img alt="An ingress-nginx log dashboard for Argo CD" src="../../assets/user_dashboard_logs_ingress.webp">
@@ -318,7 +319,7 @@ curl $SUBDOMAIN_NAME.dev.poolc.org
    총 300,000개의 요청을 최대 1,000개씩 동시에 보내게 됩니다.
 
    ```sh
-   ab -n 300000 -c 1000 http://$SUBDOMAIN_NAME.dev.poolc.org/
+   ab -n 300000 -c 1000 http://localhost:8080/
    ```
 
 #### Grafana에서 Metric 확인하기

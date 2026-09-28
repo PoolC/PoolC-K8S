@@ -37,7 +37,7 @@ flowchart TB
 
   ArgoCD --->|poll manifests| Git
 
-  Dev -->|접속: *.dev.poolc.org| Ingress
+  Dev -->|내부망 또는 포트 포워딩 접속| Ingress
   Ingress --> AppSvc
 
   ArgoCD -->|apply manifest changes| AppSvc
